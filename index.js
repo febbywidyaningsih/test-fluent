@@ -31,7 +31,7 @@ function render_video(fname) {
 		  .save(output_folder + path.basename(fname,path.extname(fname)) + config.prefix + '.mp4')
 		  
 		  .on('start', (commandLine) => {
-			console.log('Spawned Ffmpeg with command: ' + commandLine)
+			console.log('[?] - Spawned Ffmpeg with command: ' + commandLine)
 			current++;
 			console.log('['+ current + '/' + last + '] [' + path.basename(fname) + '] - Rendering...')
 		  })
@@ -75,8 +75,9 @@ getDirectories(process.cwd(), (err, res) => {
 async function processVideo(array) {
 	console.log(output_folder)
 	if (fs.existsSync(output_folder) && fs.lstatSync(output_folder).isDirectory()) {
-		// Please wait
+		console.log('[+] Target output : ' + output_folder)
 	} else {
+		console.log('[+] Making folder : ' + output_folder)
 		fs.mkdirSync(path.join(process.cwd(), 'output'));
 	}
 	for (const item of array) {
