@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build-win": "pkg index.js --targets node12-win-x64",
+	"start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
