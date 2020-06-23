@@ -1,4 +1,6 @@
 {
+    "present": "ultrafast",
+    "crf": "23",
 	"audioCodec": "opus",
 	"videoCodec": "x265",
 	"prefix": "-uwu"
