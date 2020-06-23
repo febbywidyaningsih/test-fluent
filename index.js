@@ -4,10 +4,12 @@ const ffmpeg = require('fluent-ffmpeg')
 const glob = require('glob')
 const os = require('os');
 
-let output_folder = path.join(__dirname, 'output/')
-let config = require(path.join(__dirname, 'config.json'))
+let output_folder = path.join(process.cwd(), 'output/')
+let path_config = path.join(process.cwd(), 'config.json')
 
-let ffmpegloc = path.join(__dirname, 'bin/ffmpeg')
+let config = require(path_config)
+
+let ffmpegloc = path.join(process.cwd(), 'bin/ffmpeg')
 if (os.platform().substring(0,3) == 'win') {
     ffmpegloc = ffmpegloc + '.exe'
 }
@@ -54,7 +56,8 @@ var getDirectories = (src, callback) => {
   glob(src + '/input/**/*.mkv', callback);
 };
 
-getDirectories(__dirname, (err, res) => {
+getDirectories(process.cwd(), (err, res) => {
+  console.log(process.cwd())
   if (err) {
     console.log('Error', err)
   } else {
@@ -74,7 +77,7 @@ async function processVideo(array) {
 	if (fs.existsSync(output_folder) && fs.lstatSync(output_folder).isDirectory()) {
 		// Please wait
 	} else {
-		fs.mkdirSync(path.join(__dirname, 'output'));
+		fs.mkdirSync(path.join(process.cwd(), 'output'));
 	}
 	for (const item of array) {
 		await render_video(item)
