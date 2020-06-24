@@ -83,6 +83,4 @@ async function processVideo(array) {
 	for (const item of array) {
 		await render_video(item)
 	}
-	console.log('Done!')
-	process.exit()
 }
