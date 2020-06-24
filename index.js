@@ -21,12 +21,22 @@ let last = 0
 
 function render_video(fname) {
 	return new Promise((resolve,reject)=>{
+		
+		let escape_path = fname.split(':/').join('\\:/');
         ffmpeg(fname)
           .inputOptions([
-			  '-vf subtitles="' + fname + '"',
               '-crf ' + config.crf,
               '-preset ' + config.present
           ])
+		  .complexFilter([
+			{
+				'filter': '"subtitles',
+				'options': "'" + escape_path + "'" + '"'
+			}
+		  ])
+		  //.outputOptions([
+		//	  '-filter_complex "subtitles=' + "'" + escape_path + "'" + '"',
+		  //])
 		  .audioCodec('lib' + config.audioCodec)
 		  .videoCodec('lib' + config.videoCodec)
 		  .save(output_folder + path.basename(fname,path.extname(fname)) + config.prefix + '.mp4')
@@ -48,6 +58,7 @@ function render_video(fname) {
 		  })
 		  
 		  .on('err'), (err) => {
+			console.log(err)
 			return reject(err)
 		  }
 	})

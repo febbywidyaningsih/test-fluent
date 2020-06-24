@@ -5,13 +5,15 @@
   "main": "index.js",
   "scripts": {
     "build-win": "pkg index.js --targets node12-win-x64",
-	"start": "node index.js",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bluebird": "^3.7.2",
     "fluent-ffmpeg": "^2.1.2",
-    "glob": "^7.1.6"
+    "glob": "^7.1.6",
+    "node-cmd": "^3.0.0"
   }
 }
