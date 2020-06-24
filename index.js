@@ -23,7 +23,7 @@ function render_video(fname) {
 	return new Promise((resolve,reject)=>{
         ffmpeg(fname)
           .inputOptions([
-			  '-vf subtitles=' + fname,
+			  '-vf subtitles="' + fname + '"',
               '-crf ' + config.crf,
               '-preset ' + config.present
           ])
